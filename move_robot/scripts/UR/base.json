@@ -1,0 +1,11 @@
+[
+{name:"Koncowki", type:"tips", offset: [0.0495, 0.0585, 0.02, 0.0, 0.0, 1.5705], diameter: 0.009, length:0.0508},
+{name:"Probowki", type:"probes", offset: [0.057175, 0.057875, 0.0157, 0.0, 0.0, 1.5705], diameter: 0.0127, length:0.0395}, 
+{name:"", type:"", offset: [0.0, 0.0, 0.05], diameter: 0.0},
+{name:"", type:"", offset: [0.0, 0.0, 0.05], diameter: 0.0},
+{name:"Kosz", type:"bin", offset: [0.0, 0.0745, 0.02, 0.0, 0.0, 1.5705]},
+{name:"", type:"", offset: [0.0, 0.0, 0.05], diameter: 0.0},
+{name:"", type:"", offset: [0.0, 0.0, 0.05], diameter: 0.0},
+{name:"", type:"", offset: [0.0, 0.0, 0.05], diameter: 0.0},
+{name:"Kalibracja", type:"marker", offset: [0.0, 0.1, 0.0, 0.0, 0.0, 0.0]},
+]

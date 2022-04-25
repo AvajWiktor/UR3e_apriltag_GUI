@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/scripts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/legacy_code/UR3e_User_Interface" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/legacy_code/UR3e_User_Interface/utilities/Azure-ttk-theme" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/utilities/Azure-ttk-theme" vcs="Git" />
+  </component>
+</project>
