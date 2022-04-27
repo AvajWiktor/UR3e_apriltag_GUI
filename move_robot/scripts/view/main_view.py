@@ -23,7 +23,7 @@ class MainWindowView:
         self.model = MainModel(self.robot_model)
         self.controller = MainController(self.robot_model, self.model)
         self.refresher = Thread(name='refresher', target=self.refresh)
-        self.tag_id = 0
+        self.tag_id = ttk.StringVar(value='0')
         """
         *Code here*
         """
@@ -41,14 +41,20 @@ class MainWindowView:
         pass
 
     def detector(self):
-        if self.controller.detect_tag(self.tag_id):
-            self.add_image(self.tag_id)
+        #print(self.tag_id.get())
+        if self.controller.detect_tag(self.tag_id.get()):
+            self.add_image(self.tag_id.get())
 
     def walker(self):
         pass
 
     def target_walker(self):
         pass
+
+    def connector(self):
+        connector = Thread(name='Connector', target=self.controller.connect_to_robot)
+        #self.controller.connect_to_robot()
+        connector.start()
 
     def create_layout(self):
         """Packs basic frames to root frame"""
@@ -68,15 +74,15 @@ class MainWindowView:
 
     def add_components(self):
         ttk.Label(self.menu_label_frame, text='Tag id').pack()
-        self.tag_id = ttk.StringVar()
         ttk.Entry(self.menu_label_frame, textvariable=self.tag_id, width=10).pack()
+        ttk.Button(self.menu_label_frame, text='Connect', width=10, command=self.connector).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Detect', width=10, command=self.detector).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Go to tag', width=10, command=self.walker).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Go to target', width=10, command=self.target_walker).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Execute', width=10, command=self.executor).pack(pady=5)
 
     def add_image(self, img_name):
-        img = Image.open(f'utilities/{img_name}')
+        img = Image.open(f'utilities/{img_name}.png')
         img.resize((50,50),Image.ANTIALIAS)
         test = ImageTk.PhotoImage(img)
         img_label=tk.Label(self.image_label_frame, image=test)

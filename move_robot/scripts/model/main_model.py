@@ -1,6 +1,7 @@
 from model.robot_model import RobotModel
 import rospy
 import json
+
 from os import system
 from geometry_msgs.msg import PoseStamped, Pose
 from geometry_msgs.msg import Point as Point_msg
@@ -34,7 +35,7 @@ class MainModel:
             )
             (xo, yo, zo, wo) = orientation
             (x, y, z) = transform
-            position = Pose(x, y, z, xo, yo, zo, wo)
+            position = Pose([x, y, z], [xo, yo, zo, wo])
             # Create object which represents parameters of box with given tag id
             self.tag_id = tag_id
             return position
@@ -46,3 +47,7 @@ class MainModel:
         f = open(f"utilities/tags_params.json")
         data = json.load(f)
         self.tag_params = data[tag_id]
+
+    def connect_to_robot(self):
+        self.robot_model.connect_to_robot()
+

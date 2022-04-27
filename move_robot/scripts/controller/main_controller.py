@@ -6,3 +6,6 @@ class MainController:
 
     def detect_tag(self, tag_id):
         return self.main_model.detect_tag(tag_id)
+
+    def connect_to_robot(self):
+        self.robot_model.connect_to_robot()
