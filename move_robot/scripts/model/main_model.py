@@ -1,5 +1,8 @@
-from model.robot_model import RobotModel
 import rospy
+from UR import ur_library
+import serial
+import subprocess
+from math import atan2
 import json
 
 from os import system
@@ -19,10 +22,18 @@ class MainModel:
     """
     Module responsible for detecting aruco tags and storing their position
     """
-    def __init__(self, robot_model):
-        self.robot_model = robot_model
+    def __init__(self):
         self.tag_id = None
         self.tag_params = None
+        self.move_group = None  #
+        self.detected_tags = {}  # dict of detected tags
+        self.serial_port = None  # serial.Serial('/dev/ttyUSB0', 9600, timeout=0.05)
+        self.is_connected = False
+
+    def connect_to_robot(self):
+        rc = subprocess.call("/home/wiktor/Desktop/RobotLaunch.sh")
+        self.move_group = ur_library.MoveGroupPythonInterface()
+        self.is_connected = True
 
     def detect_tag(self, tag_id):
         try:
@@ -50,4 +61,10 @@ class MainModel:
 
     def connect_to_robot(self):
         self.robot_model.connect_to_robot()
+
+    def move_to_tag(self):
+        pass
+
+    def move_to_target(self):
+        pass
 

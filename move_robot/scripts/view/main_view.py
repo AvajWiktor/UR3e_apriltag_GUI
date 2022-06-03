@@ -16,10 +16,9 @@ import json
 
 
 class MainWindowView:
-    def __init__(self, robot_model):
+    def __init__(self):
         self.root = ttk.Window(themename='cyborg', title='AprilTag detector')
         self.root.minsize(width=1200, height=800)
-        self.robot_model = robot_model
         self.model = MainModel(self.robot_model)
         self.controller = MainController(self.robot_model, self.model)
         self.refresher = Thread(name='refresher', target=self.refresh)
