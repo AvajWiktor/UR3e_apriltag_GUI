@@ -43,7 +43,7 @@ class MoveGroupPythonInterface(object):
 
         ## First initialize `moveit_commander`_ and a `rospy`_ node:
         moveit_commander.roscpp_initialize(sys.argv)
-        rospy.init_node('move_group_python_interface_tutorial', anonymous=True)
+        #rospy.init_node('move_group_python_interface_tutorial', anonymous=True)
 
         ## Instantiate a `RobotCommander`_ object. Provides information such as the robot's
         ## kinematic model and the robot's current joint states
@@ -395,7 +395,9 @@ class MoveGroupPythonInterface(object):
         yaw = math.atan2(t3, t4)
         return [yaw, pitch, roll]
 
-    def move_to_point(self, x, y, z, xo, yo, zo, wo, cur_orientation):
+    def move_to_point(self, pose, cur_orientation):
+        x,y,z = pose.position
+        xo, yo, zo, wo = pose.orientation
         current_pose = self.move_group.get_current_pose().pose
         current_position = current_pose.position
         current_orientation = current_pose.orientation

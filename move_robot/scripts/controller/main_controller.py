@@ -8,3 +8,6 @@ class MainController:
 
     def connect_to_robot(self):
         self.main_model.connect_to_robot()
+
+    def move_to_tag(self):
+        self.main_model.move_to_tag()

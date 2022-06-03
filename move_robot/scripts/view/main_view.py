@@ -19,8 +19,8 @@ class MainWindowView:
     def __init__(self):
         self.root = ttk.Window(themename='cyborg', title='AprilTag detector')
         self.root.minsize(width=1200, height=800)
-        self.model = MainModel(self.robot_model)
-        self.controller = MainController(self.robot_model, self.model)
+        self.model = MainModel()
+        self.controller = MainController(self.model)
         self.refresher = Thread(name='refresher', target=self.refresh)
         self.tag_id = ttk.StringVar(value='0')
         """
@@ -40,19 +40,20 @@ class MainWindowView:
         pass
 
     def detector(self):
-        #print(self.tag_id.get())
         if self.controller.detect_tag(self.tag_id.get()):
+            print(f"Tag {self.tag_id.get()} detected!")
             self.add_image(self.tag_id.get())
+        else:
+            print(f"Tag {self.tag_id.get()} could not be detected")
 
     def walker(self):
-        pass
+        self.controller.move_to_tag()
 
     def target_walker(self):
         pass
 
     def connector(self):
         connector = Thread(name='Connector', target=self.controller.connect_to_robot)
-        #self.controller.connect_to_robot()
         connector.start()
 
     def create_layout(self):
