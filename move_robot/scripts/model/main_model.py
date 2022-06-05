@@ -59,8 +59,9 @@ class MainModel:
             position = Pose([x, y, z], [xo, yo, zo, wo])
             # Create object which represents parameters of box with given tag id
             self.tag_id = tag_id
-            #self.read_tag_info(tag_id)
+            self.read_tag_info(tag_id)
             self.tag_position = position
+            print(self.tag_position)
             return True
         except Exception as exc:
             print(exc)
@@ -70,6 +71,7 @@ class MainModel:
         f = open(f"utilities/params.json")
         data = json.load(f)
         self.tag_params = data[tag_id]
+        print(self.tag_params)
 
     def move_to_tag(self):
         if self.tag_position is not None:
@@ -79,5 +81,16 @@ class MainModel:
             print("Tag position unknown")
 
     def move_to_target(self):
-        pass
+        if self.tag_position is not None:
+            target_pose = self.tag_position
+            for i, position in enumerate(target_pose.position):
+                target_pose.position[i] += self.tag_params['tf'][i]
+
+            print(target_pose)
+            self.move_group.move_to_point(target_pose, False)
+        else:
+            print("Tag position unknown")
+
+    def go_home(self):
+        self.move_group.go_to_joint_state(90.0, -90.0, 60.0, 30.0, 90.0, 90.0)
 

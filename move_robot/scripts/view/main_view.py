@@ -36,8 +36,8 @@ class MainWindowView:
     def refresh(self):
         pass
 
-    def executor(self):
-        pass
+    def go_home(self):
+        self.controller.go_home()
 
     def detector(self):
         if self.controller.detect_tag(self.tag_id.get()):
@@ -50,7 +50,7 @@ class MainWindowView:
         self.controller.move_to_tag()
 
     def target_walker(self):
-        pass
+        self.controller.move_to_target()
 
     def connector(self):
         connector = Thread(name='Connector', target=self.controller.connect_to_robot)
@@ -79,16 +79,20 @@ class MainWindowView:
         ttk.Button(self.menu_label_frame, text='Detect', width=10, command=self.detector).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Go to tag', width=10, command=self.walker).pack(pady=5)
         ttk.Button(self.menu_label_frame, text='Go to target', width=10, command=self.target_walker).pack(pady=5)
-        ttk.Button(self.menu_label_frame, text='Execute', width=10, command=self.executor).pack(pady=5)
+        ttk.Button(self.menu_label_frame, text='Go home', width=10, command=self.go_home).pack(pady=5)
+        #ttk.Button(self.menu_label_frame, text='Test', width=10, command=self.add_image).pack(pady=5)
+
+        self.image_label = tk.Label(self.image_label_frame)
+        self.image_label.pack()
 
     def add_image(self, img_name):
         img = Image.open(f'utilities/{img_name}.png')
         img.resize((50,50),Image.ANTIALIAS)
         test = ImageTk.PhotoImage(img)
-        img_label=tk.Label(self.image_label_frame, image=test)
-        img_label.image = test
+        self.image_label.configure(image=test)
+        self.image_label.image = test
 
         # Position image
-        img_label.pack()#place(x= 10, y = 10)
+        #img_label.pack()#place(x= 10, y = 10)
         # Create a Label Widget to display the text or Image
 

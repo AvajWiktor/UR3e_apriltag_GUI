@@ -11,3 +11,9 @@ class MainController:
 
     def move_to_tag(self):
         self.main_model.move_to_tag()
+
+    def move_to_target(self):
+        self.main_model.move_to_target()
+
+    def go_home(self):
+        self.main_model.go_home()
